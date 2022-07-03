@@ -1,12 +1,12 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 export interface Guesses {
-    guess1: string | null;
-    guess2: string | null;
-    guess3: string | null;
-    guess4: string | null;
-    guess5: string | null;
-    guess6: string | null;
+    guess1: string;
+    guess2: string;
+    guess3: string;
+    guess4: string;
+    guess5: string;
+    guess6: string;
 }
 
 interface State {
@@ -18,12 +18,12 @@ interface State {
 
 export function useEventListeners(): State {
     const [guesses, setGuesses] = useState<Guesses>({
-        guess1: null,
-        guess2: null,
-        guess3: null,
-        guess4: null,
-        guess5: null,
-        guess6: null,
+        guess1: "",
+        guess2: "",
+        guess3: "",
+        guess4: "",
+        guess5: "",
+        guess6: "",
     });
     const [currentWord, setCurrentWord] = useState<string[]>([]);
 
@@ -40,36 +40,34 @@ export function useEventListeners(): State {
     }, []);
 
     useEffect(() => {
-        if (currentWord.length % 5 === 0 && currentWord.length !== 0) {
-            if (guesses?.guess1 === null) {
-                setGuesses({ ...guesses, guess1: currentWord.join("") });
-                setCurrentWord([]);
+        for (const [index, [g, _]] of Object.entries(Object.entries(guesses))) {
+            type GuessesKeys = keyof typeof guesses;
+            const guess = g as GuessesKeys;
+
+            if (guesses.guess1.length !== 5) {
+                if (guesses[guess as GuessesKeys]?.length < 5) {
+                    setGuesses({
+                        ...guesses,
+                        [guess]: currentWord.join(""),
+                    });
+                }
+
+                if (currentWord.length === 5) setCurrentWord([]);
                 return;
-            }
-            if (guesses?.guess2 === null) {
-                setGuesses({ ...guesses, guess2: currentWord.join("") });
-                setCurrentWord([]);
-                return;
-            }
-            if (guesses?.guess3 === null) {
-                setGuesses({ ...guesses, guess3: currentWord.join("") });
-                setCurrentWord([]);
-                return;
-            }
-            if (guesses?.guess4 === null) {
-                setGuesses({ ...guesses, guess4: currentWord.join("") });
-                setCurrentWord([]);
-                return;
-            }
-            if (guesses?.guess5 === null) {
-                setGuesses({ ...guesses, guess5: currentWord.join("") });
-                setCurrentWord([]);
-                return;
-            }
-            if (guesses?.guess6 === null) {
-                setGuesses({ ...guesses, guess6: currentWord.join("") });
-                setCurrentWord([]);
-                return;
+            } else {
+                if (
+                    guesses[`guess${+index + 1}` as GuessesKeys].length < 5 &&
+                    guesses.guess1.length === 5
+                ) {
+                    setGuesses({
+                        ...guesses,
+                        [`guess${+index + 1}` as GuessesKeys]:
+                            currentWord.join(""),
+                    });
+
+                    if (currentWord.length === 5) setCurrentWord([]);
+                    return;
+                }
             }
         }
     }, [currentWord]);
