@@ -1,22 +1,29 @@
-import { Guesses } from "../hooks/useEventListener";
-import { guessIndex } from "../utils/guessIndex";
+import { Guesses } from "../hooks/useGame";
 import { Row } from "./row";
 
 export interface Props {
     guesses: Guesses;
+    solution: string;
+    currentGuess: string;
 }
 
-export function WordGrid({ guesses }: Props) {
+export function WordGrid({ guesses, solution, currentGuess }: Props) {
     return (
         <div className="flex flex-col">
-            {Array(6)
-                .fill(null)
-                .map((_, index) => (
+            {guesses.map((guess, index) => {
+                const isCurrentGuess =
+                    index === guesses.findIndex((g) => g === null);
+                return (
                     <Row
-                        guess={guesses[guessIndex(index)!]}
+                        guess={guesses[index]}
+                        solution={solution}
+                        currentGuess={
+                            isCurrentGuess ? currentGuess : guess ?? null
+                        }
                         key={`row_${index}`}
                     />
-                ))}
+                );
+            })}
         </div>
     );
 }

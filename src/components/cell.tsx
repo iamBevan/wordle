@@ -1,10 +1,15 @@
+export type CellColor = "" | "green" | "red";
+
 interface CellProps {
     letter: string;
+    color: CellColor;
 }
 
-export function Cell({ letter }: CellProps) {
+export function Cell({ letter, color }: CellProps) {
     return (
-        <div className="h-16 w-16 m-1 border-2 border-neutral-700 text-white flex justify-center items-center text-grid">
+        <div
+            className={`h-16 w-16 m-1 border-2 border-neutral-700 text-white flex justify-center items-center text-grid bg-${color}-500`}
+        >
             {letter}
         </div>
     );

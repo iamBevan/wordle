@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import { WordGrid } from "./components/word-grid";
-import { words } from "./words";
+import { useGame } from "./hooks/useGame";
 import "./index.css";
-import { useEventListeners } from "./hooks/useEventListener";
 
 function App() {
-    const { guesses } = useEventListeners();
-
-    const randomWord = words[Math.floor(Math.random() * words.length)];
-
+    const { guesses, currentGuess, solution } = useGame();
     return (
         <>
             <div className="min-h-screen flex justify-center items-center bg-black">
-                <WordGrid guesses={guesses} />
+                <p className="text-white">{solution}</p>
+                <WordGrid
+                    currentGuess={currentGuess}
+                    guesses={guesses}
+                    solution={solution}
+                />
             </div>
         </>
     );
