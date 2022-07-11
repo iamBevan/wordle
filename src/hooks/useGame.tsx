@@ -1,70 +1,82 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { ActionTypes, AppContext } from "../context";
 import { gameKeys } from "../gameKeys";
 import { words } from "../words";
 
 export type Guesses = string[];
 
 interface State {
-    guesses: Guesses;
-    currentGuess: string;
-    isGameOver: boolean;
     solution: string;
 }
 
 export function useGame(): State {
-    const [guesses, setGuesses] = useState(Array(6).fill(null));
-    const [currentGuess, setCurrentguess] = useState("");
-    const [isGameOver, setIsGameOver] = useState(false);
+    const { state, dispatch } = useContext(AppContext);
 
     const solution = useRef(
         words[Math.floor(Math.random() * words.length)]
     ).current;
 
     useEffect(() => {
-        const handleKeyPress = ({ key }: KeyboardEvent): void => {
+        const handleKeyPress = (event: KeyboardEvent): void => {
+            const key = event.key.toUpperCase();
+
             if (gameKeys.indexOf(key) === -1) return;
 
-            if (key === "Backspace") {
-                setCurrentguess((oldGuess) => oldGuess.slice(0, -1));
+            if (key === "BACKSPACE") {
+                dispatch({
+                    type: ActionTypes.SetCurrentGuess,
+                    payload: state.currentGuess.slice(0, -1),
+                });
                 return;
             }
 
-            if (key === "Enter") {
-                if (currentGuess.length !== 5) return;
+            if (key === "ENTER") {
+                if (state.currentGuess.length !== 5) return;
 
-                const isCorrect = solution === currentGuess;
-                if (isCorrect) {
-                    document.removeEventListener("keydown", handleKeyPress);
-                    setIsGameOver(true);
-                }
-
-                const firstNullIndex = guesses.findIndex(
+                const firstNullIndex = state.guesses.findIndex(
                     (element) => element === null
                 );
-                const newGuesses = guesses;
+                const newGuesses = state.guesses;
 
-                newGuesses[firstNullIndex] = currentGuess;
+                newGuesses[firstNullIndex] = state.currentGuess;
 
-                setGuesses(newGuesses);
-                setCurrentguess("");
+                dispatch({
+                    type: ActionTypes.SetGuess,
+                    payload: newGuesses,
+                });
+
+                dispatch({
+                    type: ActionTypes.SetCurrentGuess,
+                    payload: "",
+                });
+                const isCorrect = solution === state.currentGuess;
+                if (isCorrect) {
+                    document.removeEventListener("keydown", handleKeyPress);
+                    dispatch({
+                        type: ActionTypes.SetGameover,
+                        payload: true,
+                    });
+                    return;
+                }
             }
 
-            if (currentGuess.length === 5) return;
+            if (state.currentGuess.length === 5) return;
 
-            setCurrentguess((oldGuess) => oldGuess + key);
+            dispatch({
+                type: ActionTypes.SetCurrentGuess,
+                payload: state.currentGuess + key,
+            });
         };
 
-        document.addEventListener("keydown", handleKeyPress);
+        state.gameOver === false &&
+            document.addEventListener("keydown", handleKeyPress);
 
         return () => {
             document.removeEventListener("keydown", handleKeyPress);
         };
-    }, [currentGuess, isGameOver, solution]);
+    }, [state]);
 
     return {
-        guesses,
-        currentGuess,
-        isGameOver,
         solution,
     };
 }

@@ -1,24 +1,27 @@
-import { Guesses } from "../hooks/useGame";
+import { useContext, useEffect } from "react";
+import { ActionTypes, AppContext } from "../context";
+import { Guesses, useGame } from "../hooks/useGame";
+import { words } from "../words";
 import { Row } from "./row";
 
-export interface Props {
-    guesses: Guesses;
-    solution: string;
-    currentGuess: string;
-}
+export function WordGrid() {
+    const { solution } = useGame();
+    const { state, dispatch } = useContext(AppContext);
 
-export function WordGrid({ guesses, solution, currentGuess }: Props) {
+    console.log(solution);
+
     return (
         <div className="flex flex-col">
-            {guesses.map((guess, index) => {
+            {state.gameOver && <p className="text-white">{solution}</p>}
+            {state.guesses.map((guess, index) => {
                 const isCurrentGuess =
-                    index === guesses.findIndex((g) => g === null);
+                    index === state.guesses.findIndex((g) => g === null);
                 return (
                     <Row
-                        guess={guesses[index]}
+                        guess={state.guesses[index]}
                         solution={solution}
                         currentGuess={
-                            isCurrentGuess ? currentGuess : guess ?? null
+                            isCurrentGuess ? state.currentGuess : guess ?? null
                         }
                         key={`row_${index}`}
                     />

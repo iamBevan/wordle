@@ -10,14 +10,14 @@ export function Row({ currentGuess, solution, guess }: RowProps) {
     const getBackgroundColor = (index: number): CellColor => {
         if (guess === null) return "";
 
-        if (solution[index] === guess?.[index]) return "green";
+        if (solution[index] === guess[index]) return "green";
 
         if (
             solution.includes(guess[index]) &&
             solution[index] !== guess?.[index]
-        )
-            return "red";
-
+        ) {
+            return "salmon";
+        }
         return "";
     };
 
