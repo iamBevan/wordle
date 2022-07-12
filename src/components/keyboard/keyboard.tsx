@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AppContext } from "../context";
-import { gameKeys } from "../gameKeys";
+import { AppContext } from "../../context";
+import { gameKeys } from "../../gameKeys";
 
 export const Keyboard = () => {
     const { state } = useContext(AppContext);
@@ -21,10 +21,10 @@ export const Keyboard = () => {
     const guessedKeys = [...new Set(flattenedGuesses)];
 
     const getBackgroundColor = (key: string): string => {
-        if (correctKeys.flat().includes(key)) return "green";
+        if (correctKeys.flat().includes(key)) return "#538d4e";
 
         if (flattenedGuesses.includes(key) && state.solution.includes(key))
-            return "yellow";
+            return "#b59f3b";
 
         if (guessedKeys.includes(key)) return "gray";
 

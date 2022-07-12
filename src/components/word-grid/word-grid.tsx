@@ -1,13 +1,11 @@
-import { useContext, useEffect } from "react";
-import { ActionTypes, AppContext } from "../context";
-import { Guesses, useGame } from "../hooks/useGame";
-import { Row } from "./row";
+import { useContext } from "react";
+import { AppContext } from "../../context";
+import { useGame } from "../../hooks/useGame";
+import { Row } from "../row/row";
 
 export function WordGrid() {
     useGame();
-    const { state, dispatch } = useContext(AppContext);
-
-    console.log(state.solution);
+    const { state } = useContext(AppContext);
 
     return (
         <div className="flex flex-col">

@@ -1,16 +1,19 @@
-// import { Keyboard } from "./components/keyboard";
-import { Keyboard } from "./components/keyboard";
-import { WordGrid } from "./components/word-grid";
 import { ContextProvider } from "./context";
-import "./index.css";
+import styles from "./App.scss";
+import { WordGrid } from "./components/word-grid/word-grid";
+import { Keyboard } from "./components/keyboard/keyboard";
 
 function App() {
     return (
         <ContextProvider>
-            <div className="min-h-screen flex justify-center flex-col items-center bg-black">
-                <WordGrid />
-                <Keyboard />
-            </div>
+            <main className="main">
+                <section className="grid-container">
+                    <WordGrid />
+                </section>
+                <section className="keyboard-container">
+                    <Keyboard />
+                </section>
+            </main>
         </ContextProvider>
     );
 }

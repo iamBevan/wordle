@@ -1,4 +1,4 @@
-import { Cell, CellColor } from "./cell";
+import { Cell, CellColor } from "../cell/cell";
 
 interface RowProps {
     currentGuess: string | null;
@@ -10,13 +10,13 @@ export function Row({ currentGuess, solution, guess }: RowProps) {
     const getBackgroundColor = (index: number): CellColor => {
         if (guess === null) return "";
 
-        if (solution[index] === guess[index]) return "green";
+        if (solution[index] === guess[index]) return "#538d4e";
 
         if (
             solution.includes(guess[index]) &&
             solution[index] !== guess?.[index]
         ) {
-            return "salmon";
+            return "#b59f3b";
         }
         return "";
     };
