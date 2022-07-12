@@ -20,7 +20,7 @@ type InitialState = {
 
 const initialState = {
     currentGuess: "",
-    guesses: Array(5).fill(null),
+    guesses: Array(6).fill(null),
     gameOver: false,
     solution: words[Math.floor(Math.random() * words.length)],
 };

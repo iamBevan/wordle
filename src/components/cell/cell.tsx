@@ -1,20 +1,16 @@
 import styles from "./cell.module.scss";
 
-export type CellColor = "" | "#538d4e" | "#b59f3b";
+export type CellDataState = "blank" | "correct" | "absent" | "present";
 
 interface CellProps {
     letter: string;
-    color: CellColor;
+    dataState: CellDataState;
 }
 
-export function Cell({ letter, color }: CellProps) {
+export function Cell({ letter, dataState }: CellProps) {
     return (
-        <div
-            style={{ backgroundColor: color }}
-            // className={`h-16 w-16 m-1 border-2 border-neutral-700 text-white flex justify-center items-center text-grid`}
-            className={styles.cell}
-        >
-            {letter}
+        <div data-state={dataState} className={styles.cell}>
+            {letter.length ? letter : ""}
         </div>
     );
 }

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap");
+@import "./variables.scss";
 
 @tailwind base;
 @tailwind components;
@@ -9,10 +10,14 @@ html {
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    // font-family: "Open Sans", sans-serif;
     height: 100%;
     background-color: #121213;
     margin: 0;
     padding: 0;
     overflow-y: hidden;
+
+    #root {
+        height: 100%;
+    }
 }

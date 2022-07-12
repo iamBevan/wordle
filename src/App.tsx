@@ -1,7 +1,7 @@
 import { ContextProvider } from "./context";
-import styles from "./App.scss";
 import { WordGrid } from "./components/word-grid/word-grid";
 import { Keyboard } from "./components/keyboard/keyboard";
+import "./styles/App.scss";
 
 function App() {
     return (

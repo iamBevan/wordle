@@ -2,13 +2,16 @@ import { useContext } from "react";
 import { AppContext } from "../../context";
 import { useGame } from "../../hooks/useGame";
 import { Row } from "../row/row";
+import styles from "./word-grid.module.scss";
 
 export function WordGrid() {
     useGame();
     const { state } = useContext(AppContext);
 
+    console.log(state.solution);
+
     return (
-        <div className="flex flex-col">
+        <div className={styles.grid}>
             {state.gameOver && <p className="text-white">{state.solution}</p>}
             {state.guesses.map((guess, index) => {
                 const isCurrentGuess =

@@ -1,4 +1,5 @@
-import { Cell, CellColor } from "../cell/cell";
+import { Cell, CellDataState } from "../cell/cell";
+import styles from "./row.module.scss";
 
 interface RowProps {
     currentGuess: string | null;
@@ -7,27 +8,27 @@ interface RowProps {
 }
 
 export function Row({ currentGuess, solution, guess }: RowProps) {
-    const getBackgroundColor = (index: number): CellColor => {
-        if (guess === null) return "";
+    const getBackgroundColor = (index: number): CellDataState => {
+        if (guess === null) return "blank";
 
-        if (solution[index] === guess[index]) return "#538d4e";
+        if (solution[index] === guess[index]) return "correct";
 
         if (
             solution.includes(guess[index]) &&
             solution[index] !== guess?.[index]
         ) {
-            return "#b59f3b";
+            return "present";
         }
-        return "";
+        return "absent";
     };
 
     return (
-        <div className="flex flex-row">
+        <div className={styles.row}>
             {Array(5)
                 .fill(null)
                 .map((_, index) => (
                     <Cell
-                        color={getBackgroundColor(index)}
+                        dataState={getBackgroundColor(index)}
                         letter={currentGuess?.[index] ?? ""}
                         key={`cell_${index}`}
                     />
