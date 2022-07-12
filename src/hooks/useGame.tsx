@@ -5,16 +5,12 @@ import { words } from "../words";
 
 export type Guesses = string[];
 
-interface State {
-    solution: string;
-}
-
-export function useGame(): State {
+export function useGame(): void {
     const { state, dispatch } = useContext(AppContext);
 
-    const solution = useRef(
-        words[Math.floor(Math.random() * words.length)]
-    ).current;
+    // const solution = useRef(
+    //     words[Math.floor(Math.random() * words.length)]
+    // ).current;
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent): void => {
@@ -49,7 +45,7 @@ export function useGame(): State {
                     type: ActionTypes.SetCurrentGuess,
                     payload: "",
                 });
-                const isCorrect = solution === state.currentGuess;
+                const isCorrect = state.solution === state.currentGuess;
                 if (isCorrect) {
                     document.removeEventListener("keydown", handleKeyPress);
                     dispatch({
@@ -75,8 +71,4 @@ export function useGame(): State {
             document.removeEventListener("keydown", handleKeyPress);
         };
     }, [state]);
-
-    return {
-        solution,
-    };
 }

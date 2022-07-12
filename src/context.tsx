@@ -1,4 +1,5 @@
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
+import { words } from "./words";
 
 export enum ActionTypes {
     SetGuess = "SET_GUESSES",
@@ -14,12 +15,14 @@ type InitialState = {
     guesses: string[];
     currentGuess: string;
     gameOver: boolean;
+    solution: string;
 };
 
 const initialState = {
     currentGuess: "",
     guesses: Array(5).fill(null),
     gameOver: false,
+    solution: words[Math.floor(Math.random() * words.length)],
 };
 
 export const AppContext = createContext<{
