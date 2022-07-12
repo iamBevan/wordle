@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../../context";
 import { gameKeys } from "../../gameKeys";
+import styles from "./keyboard.module.scss";
 
 export const Keyboard = () => {
     const { state } = useContext(AppContext);
@@ -32,40 +33,40 @@ export const Keyboard = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center">
-            <div className="flex justify-center">
+        <>
+            <div className={styles.row}>
                 {topRow.map((key) => (
-                    <div
-                        style={{ backgroundColor: getBackgroundColor(key) }}
-                        className="border-2 border-neutral-700 text-white"
+                    <button
+                        // style={{ backgroundColor: getBackgroundColor(key) }}
+                        className={styles.button}
                         key={key}
                     >
                         {key}
-                    </div>
+                    </button>
                 ))}
             </div>
-            <div className="flex justify-center">
+            <div className={styles.row}>
                 {middleRow.map((key) => (
                     <div
-                        style={{ backgroundColor: getBackgroundColor(key) }}
-                        className="border-2 border-neutral-700 text-white"
+                        // style={{ backgroundColor: getBackgroundColor(key) }}
+                        className={styles.button}
                         key={key}
                     >
                         {key}
                     </div>
                 ))}
             </div>
-            <div className="flex justify-center">
+            <div className={styles.row}>
                 {bottomRow.map((key) => (
                     <div
-                        style={{ backgroundColor: getBackgroundColor(key) }}
-                        className="border-2 border-neutral-700 text-white"
+                        // style={{ backgroundColor: getBackgroundColor(key) }}
+                        className={styles.button}
                         key={key}
                     >
                         {key === "BACKSPACE" ? "<-" : key}
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 };

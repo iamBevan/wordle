@@ -1,16 +1,11 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ActionTypes, AppContext } from "../context";
 import { gameKeys } from "../gameKeys";
-import { words } from "../words";
 
 export type Guesses = string[];
 
 export function useGame(): void {
     const { state, dispatch } = useContext(AppContext);
-
-    // const solution = useRef(
-    //     words[Math.floor(Math.random() * words.length)]
-    // ).current;
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent): void => {
