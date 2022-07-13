@@ -12,7 +12,6 @@ export function WordGrid() {
 
     return (
         <div className={styles.grid}>
-            {state.gameOver && <p className="text-white">{state.solution}</p>}
             {state.guesses.map((guess, index) => {
                 const isCurrentGuess =
                     index === state.guesses.findIndex((g) => g === null);

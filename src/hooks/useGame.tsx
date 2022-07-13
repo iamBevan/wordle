@@ -18,6 +18,7 @@ export function useGame(): void {
                     type: ActionTypes.SetCurrentGuess,
                     payload: state.currentGuess.slice(0, -1),
                 });
+
                 return;
             }
 
@@ -40,13 +41,17 @@ export function useGame(): void {
                     type: ActionTypes.SetCurrentGuess,
                     payload: "",
                 });
+
                 const isCorrect = state.solution === state.currentGuess;
+
                 if (isCorrect) {
                     document.removeEventListener("keydown", handleKeyPress);
+
                     dispatch({
                         type: ActionTypes.SetGameover,
                         payload: true,
                     });
+
                     return;
                 }
             }
