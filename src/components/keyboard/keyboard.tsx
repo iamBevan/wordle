@@ -21,13 +21,13 @@ export const Keyboard = () => {
 
     const guessedKeys = [...new Set(flattenedGuesses)];
 
-    const getBackgroundColor = (key: string): string => {
-        if (correctKeys.flat().includes(key)) return "#538d4e";
+    const getKeyState = (key: string): string => {
+        if (correctKeys.flat().includes(key)) return "correct";
 
         if (flattenedGuesses.includes(key) && state.solution.includes(key))
-            return "#b59f3b";
+            return "present";
 
-        if (guessedKeys.includes(key)) return "gray";
+        if (guessedKeys.includes(key)) return "absent";
 
         return "";
     };
@@ -37,8 +37,9 @@ export const Keyboard = () => {
             <div className={styles.row}>
                 {topRow.map((key) => (
                     <button
-                        // style={{ backgroundColor: getBackgroundColor(key) }}
                         className={styles.button}
+                        data-state={getKeyState(key)}
+                        data-key={key}
                         key={key}
                     >
                         {key}
@@ -46,21 +47,25 @@ export const Keyboard = () => {
                 ))}
             </div>
             <div className={styles.row}>
+                <div data-key="spacer" />
                 {middleRow.map((key) => (
                     <div
-                        // style={{ backgroundColor: getBackgroundColor(key) }}
                         className={styles.button}
+                        data-state={getKeyState(key)}
+                        data-key={key}
                         key={key}
                     >
                         {key}
                     </div>
                 ))}
+                <div data-key="spacer" />
             </div>
             <div className={styles.row}>
                 {bottomRow.map((key) => (
                     <div
-                        // style={{ backgroundColor: getBackgroundColor(key) }}
                         className={styles.button}
+                        data-state={getKeyState(key)}
+                        data-key={key}
                         key={key}
                     >
                         {key === "BACKSPACE" ? "<-" : key}

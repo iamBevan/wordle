@@ -33,4 +33,26 @@
         text-align: center;
         box-sizing: border-box;
     }
+
+    [data-state="present"] {
+        background-color: var(--yellow);
+    }
+
+    [data-state="correct"] {
+        background-color: var(--green);
+    }
+
+    [data-state="absent"] {
+        background-color: var(--color-tone-4);
+    }
+
+    [data-key="ENTER"],
+    [data-key="BACKSPACE"] {
+        flex: 1.5;
+        font-size: 12px;
+    }
+
+    [data-key="spacer"] {
+        flex: 0.5;
+    }
 }
