@@ -10,19 +10,18 @@ export const Keyboard = () => {
     const middleRow = gameKeys.slice(10, 19);
     const bottomRow = gameKeys.slice(19, 28);
 
-    const flattenedGuesses = state.guesses
-        .filter((g) => g !== null)
-        .flatMap((g) => g.split(""));
+    const nonNullGuesses = state.guesses.filter((guess) => guess !== null);
 
-    const correctKeys = state.guesses
-        .filter((g) => g !== null)
-        .map((g) => g.split(""))
-        .map((e) => e.filter((d, i) => d === state.solution[i]));
+    const flattenedGuesses = nonNullGuesses.flatMap((guess) => guess.split(""));
 
     const guessedKeys = [...new Set(flattenedGuesses)];
 
+    const correctKeys = nonNullGuesses
+        .map((g) => g.split(""))
+        .flatMap((e) => e.filter((d, i) => d === state.solution[i]));
+
     const getKeyState = (key: string): string => {
-        if (correctKeys.flat().includes(key)) return "correct";
+        if (correctKeys.includes(key)) return "correct";
 
         if (flattenedGuesses.includes(key) && state.solution.includes(key))
             return "present";
