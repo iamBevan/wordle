@@ -6,11 +6,11 @@ import "./styles/App.scss";
 function App() {
     return (
         <ContextProvider>
-            <main className="main">
-                <section className="grid-container">
+            <main className='main'>
+                <section className='grid-container'>
                     <WordGrid />
                 </section>
-                <section className="keyboard-container">
+                <section className='keyboard-container'>
                     <Keyboard />
                 </section>
             </main>

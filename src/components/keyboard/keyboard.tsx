@@ -11,13 +11,13 @@ export const Keyboard = () => {
     const bottomRow = gameKeys.slice(19, 28);
 
     const flattenedGuesses = state.guesses
-        .filter((g) => g !== null)
-        .flatMap((g) => g.split(""));
+        .filter(g => g !== null)
+        .flatMap(g => g.split(""));
 
     const correctKeys = state.guesses
-        .filter((g) => g !== null)
-        .map((g) => g.split(""))
-        .map((e) => e.filter((d, i) => d === state.solution[i]));
+        .filter(g => g !== null)
+        .map(g => g.split(""))
+        .map(e => e.filter((d, i) => d === state.solution[i]));
 
     const guessedKeys = [...new Set(flattenedGuesses)];
 
@@ -35,7 +35,7 @@ export const Keyboard = () => {
     return (
         <>
             <div className={styles.row}>
-                {topRow.map((key) => (
+                {topRow.map(key => (
                     <button
                         className={styles.button}
                         data-state={getKeyState(key)}
@@ -47,8 +47,8 @@ export const Keyboard = () => {
                 ))}
             </div>
             <div className={styles.row}>
-                <div data-key="spacer" />
-                {middleRow.map((key) => (
+                <div data-key='spacer' />
+                {middleRow.map(key => (
                     <div
                         className={styles.button}
                         data-state={getKeyState(key)}
@@ -58,10 +58,10 @@ export const Keyboard = () => {
                         {key}
                     </div>
                 ))}
-                <div data-key="spacer" />
+                <div data-key='spacer' />
             </div>
             <div className={styles.row}>
-                {bottomRow.map((key) => (
+                {bottomRow.map(key => (
                     <div
                         className={styles.button}
                         data-state={getKeyState(key)}
