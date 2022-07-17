@@ -26,7 +26,7 @@ export function useGame(): void {
                 if (state.currentGuess.length !== 5) return;
 
                 const firstNullIndex = state.guesses.findIndex(
-                    (element) => element === null
+                    element => element === null
                 );
                 const newGuesses = state.guesses;
 

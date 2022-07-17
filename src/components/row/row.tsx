@@ -2,7 +2,7 @@ import { Cell, CellDataState } from "../cell/cell";
 import styles from "./row.module.scss";
 
 interface RowProps {
-    currentGuess: string | null;
+    currentGuess: string;
     solution: string;
     guess: string | null;
 }
@@ -28,9 +28,10 @@ export function Row({ currentGuess, solution, guess }: RowProps) {
                 .fill(null)
                 .map((_, index) => (
                     <Cell
+                        key={`cell_${index}`}
                         dataState={getBackgroundColor(index)}
                         letter={currentGuess?.[index] ?? ""}
-                        key={`cell_${index}`}
+                        cellIndex={index}
                     />
                 ))}
         </div>

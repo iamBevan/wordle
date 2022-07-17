@@ -14,13 +14,13 @@ export function WordGrid() {
         <div className={styles.grid}>
             {state.guesses.map((guess, index) => {
                 const isCurrentGuess =
-                    index === state.guesses.findIndex((g) => g === null);
+                    index === state.guesses.findIndex(g => g === null);
                 return (
                     <Row
                         guess={state.guesses[index]}
                         solution={state.solution}
                         currentGuess={
-                            isCurrentGuess ? state.currentGuess : guess ?? null
+                            isCurrentGuess ? state.currentGuess : guess
                         }
                         key={`row_${index}`}
                     />

@@ -1,5 +1,55 @@
+@mixin cellAnimation($name, $color) {
+    @keyframes #{$name} {
+        @content ($color);
+    }
+}
+
+@mixin animation($name, $color, $str) {
+    @include cellAnimation($name, $color) using ($color) {
+        50% {
+            transform: rotateX(90deg);
+            background-color: #121213;
+            border-color: #3a3a3c;
+        }
+
+        100% {
+            border: none;
+            transform: rotateX(0deg);
+            background-color: var($color);
+        }
+    }
+    animation: #{$str};
+}
+
+@mixin dataState($name, $color) {
+    @if $name != blank {
+        [data-state="#{$name}"] {
+            @include animation($name, $color, "0.75s #{$name} 1 forwards");
+        }
+    }
+}
+
+@mixin animationDelays {
+    $delay: 0.3s;
+
+    @for $i from 0 through 4 {
+        [cell-number="#{$i}"] {
+            animation-delay: $delay;
+        }
+
+        $delay: $delay + 0.3s;
+    }
+}
+
 .row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 5px;
+
+    @include dataState(present, --yellow);
+    @include dataState(correct, --green);
+    @include dataState(absent, --color-tone-4);
+    @include dataState(blank, none);
+
+    @include animationDelays();
 }
