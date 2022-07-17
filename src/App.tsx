@@ -1,12 +1,12 @@
+import { Header, Keyboard, WordGrid } from "./components";
 import { ContextProvider } from "./context";
-import { WordGrid } from "./components/word-grid/word-grid";
-import { Keyboard } from "./components/keyboard/keyboard";
 import "./styles/App.scss";
 
 function App() {
     return (
         <ContextProvider>
             <main className="main">
+                <Header />
                 <section className="grid-container">
                     <WordGrid />
                 </section>
@@ -18,4 +18,4 @@ function App() {
     );
 }
 
-export default App;
+export { App };
