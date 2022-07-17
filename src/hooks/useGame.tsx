@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { ActionTypes, AppContext } from "../context";
-import { gameKeys } from "../gameKeys";
+import { gameKeys } from "../assets/gameKeys";
 
 export type Guesses = string[];
 

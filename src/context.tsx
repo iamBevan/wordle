@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, ReactNode, useReducer } from "react";
-import { words } from "./words";
+import { words } from "./assets/words";
 
 export enum ActionTypes {
     SetGuess = "SET_GUESSES",

@@ -1,16 +1,16 @@
 import { Header, Keyboard, WordGrid } from "./components";
 import { ContextProvider } from "./context";
-import "./styles/App.scss";
+import styles from "./styles/app.module.scss";
 
 function App() {
     return (
         <ContextProvider>
-            <main className="main">
-                <Header />
-                <section className="grid-container">
+            <Header />
+            <main className={styles.main}>
+                <section className={styles["grid-container"]}>
                     <WordGrid />
                 </section>
-                <section className="keyboard-container">
+                <section className={styles["keyboard-container"]}>
                     <Keyboard />
                 </section>
             </main>

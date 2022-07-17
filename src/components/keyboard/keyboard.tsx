@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../../context";
-import { gameKeys } from "../../gameKeys";
+import { gameKeys } from "../../assets/gameKeys";
 import styles from "./keyboard.module.scss";
 
 export const Keyboard = () => {
