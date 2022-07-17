@@ -11,20 +11,5 @@
     color: var(--tile-text-color);
     text-transform: uppercase;
     user-select: none;
-}
-
-[data-state="present"] {
-    background-color: var(--yellow);
-}
-
-[data-state="correct"] {
-    background-color: var(--green);
-}
-
-[data-state="absent"] {
-    background-color: var(--color-tone-4);
-}
-
-[data-state="blank"] {
     border: 2px solid var(--color-tone-4);
 }
